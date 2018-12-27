@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "Scripts/moment.min.js",
+    "inputFiles": [
+      "Scripts/moment.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/people-index.min.js",
+    "inputFiles": [
+      "Scripts/people-index.js"
+    ]
+  }
+]

@@ -1,0 +1,345 @@
+﻿@using System.Web.UI.HtmlControls
+@using SearchzHir.Web.ViewModels
+@using SertzHir.Core.Routes
+@model List<PersonViewModel>
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            <span>People List</span>
+            &nbsp;
+           
+            @using (Html.BeginForm(MvcRoutes.PeopleListRoute, MvcRoutes.PeoplePrefixRoute, FormMethod.Get, new { id = "formSearch" }))
+            {
+                <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#addPersonModal">
+                    <span class="fa fa-plus"></span>&nbsp;
+                    Add a person
+                </button>
+                <input class="form-control mr-sm-2 float-right" type="search" id="txtSearchFirstName" placeholder="first name" aria-label="Search">
+                <input class="form-control mr-sm-2 float-right" type="search" id="txtSearchLastName" placeholder="last name" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0 float-right" type="submit">Search</button>
+            }
+
+        </h5>
+        <div style="height:30px;">
+        </div>
+        <table class="table table-hover">
+            <thead class="" style="background-color: #6AC7B3;">
+                <tr>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Date of Birth</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyPeople">
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td scope="row">
+                            @item.LastName
+                        </td>
+                        <td scope="row">
+                            @item.FirstName
+                        </td>
+                        <td scope="row">
+                            @item.Gender
+                        </td>
+                        <td scope="row">
+                            @item.DateOfBirth.ToShortDateString()
+                        </td>
+                        <td scope="row">
+                            @item.StateCode
+                        </td>
+
+                        <td>
+                            <div class="container-fluid">
+                                <button class="btn btn-info btn-edit" type="button" id="" data-id='@item.PersonId'><span class="fa fa-edit"></span>&nbsp;Edit</button>&nbsp;
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    }
+
+            </tbody>
+        </table>
+        <!-- #region Add Person Modal -->
+
+        <div class="modal fade" id="addPersonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add a person</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="divPersonModalAlert" class="alert alert-danger" style="display: none;" role="alert">
+
+                        </div>
+                        @using (Html.BeginForm(MvcRoutes.PersonAddRoute, MvcRoutes.PeoplePrefixRoute, FormMethod.Post, new { id = "formAddPerson" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="LastName">Lastname</label>
+                                    <input type="text" class="form-control" id="LastName" name="LastName" placeholder="Lastname" required="required">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="FirstName">Firstname</label>
+                                    <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="Firstname" required="required">
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="Gender">Gender</label>
+                                    </div>
+                                    <select class="custom-select" id="Gender" name="Gender" required="required">
+                                        <option value="">Choose...</option>
+                                        <option value="F">Female</option>
+                                        <option value="M">Male</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-4">
+                                    <label for="DateOfBirth">Date of Birth</label>
+                                    <input type="date" class="form-control" id="DateOfBirth" name="DateOfBirth" placeholder="Date of birth" required="required">
+                                </div>
+                                <div id="divState" class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="StateId">State</label>
+                                    </div>
+                                    <select class="custom-select" id="StateId" name="StateId" required="required"></select>
+                                </div>
+                                <div class="form-group col-md-6">
+
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <div class="modal-footer">
+                                <button class="btn btn-success" type="Submit" data-toggle="modal" data-target="#confirmPersonModal"><span class="fa fa-save"></span>&nbsp;Add this person</button>
+                                <button type="button" class="btn btn-secondary" id="btnCancelPersonModal" data-dismiss="modal"><span class="fa fa-times"></span>&nbsp;Cancel</button>
+
+                            </div>
+
+
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- #endregion Add Person Modal -->
+        <!-- #region Edit Person Modal -->
+        <div class="modal fade" id="editPersonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Edit person info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="divPersonModalAlert" class="alert alert-danger" style="display: none;" role="alert">
+
+                        </div>
+                        @using (Html.BeginForm(MvcRoutes.PersonUpdateRoute, MvcRoutes.PeoplePrefixRoute, FormMethod.Post, new { id = "formEditPerson" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("PersonId")
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="LastName">Lastname</label>
+                                    <input type="text" class="form-control" id="LastName" name="LastName" placeholder="Lastname" required="required">
+
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="FirstName">Firstname</label>
+                                    <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="Firstname" required="required">
+
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="Gender">Gender</label>
+                                    </div>
+                                    <select class="custom-select" id="Gender" name="Gender" required>
+                                        <option value="">Choose...</option>
+                                        <option value="F">Female</option>
+                                        <option value="M">Male</option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-4">
+                                    <label for="DateOfBirth">Date of Birth</label>
+                                    <input type="date" class="form-control" id="DateOfBirth" name="DateOfBirth" placeholder="Date of birth" required="required">
+
+                                </div>
+                                <div id="divState" class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="StateId">State</label>
+                                    </div>
+                                    <select class="custom-select" id="StateId" name="StateId" required></select>
+                                </div>
+                                <div class="form-group col-md-6">
+
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <div class="modal-footer">
+                                <button class="btn btn-success" type="submit" id="btnUpdate"><span class="fa fa-save"></span>&nbsp;Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="fa fa-times"></span>&nbsp;Cancel</button>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- #endregion Edit Person Modal -->
+
+    </div>
+</div>
+
+
+<style>
+    .modal-lg {
+        max-width: 30%;
+    }
+</style>
+@section Scripts{
+    @*<script src="/Scripts/people-index.min.js"></script>*@
+    <script>
+        $(document).ready(function () {
+
+    //Retrieve States
+    $.ajax({
+        method: "GET"
+        , url: '@Url.RouteUrl(MvcRoutes.StatesListAllRouteName)'
+        , dataType: "json"
+        , success: function (data) {
+            $.each(data, function (index, item) {
+                $(" #addPersonModal #StateId").append($("<option value='" + item.StateId + "'>" + item.StateCode + " </option>"));
+
+                $(" #editPersonModal #StateId").append($("<option value='" + item.StateId + "'>" + item.StateCode + " </option>"));
+
+            });
+
+        }
+        , error: function (jqXHR, textStatus, errorThrown) {
+            $("#divPersonModalAlert").show();
+            $("#divPersonModalAlert").html(errorThrown);
+        }
+    });
+
+
+    //Bind Edit Button
+    $(".btn-edit").click(function (e) {
+        $("#editPersonModal").modal('show');
+
+        //Get the Person Record
+        $.ajax({
+            method: "GET"
+            , url: '@Url.RouteUrl(MvcRoutes.PersonGetByIdRouteName)'
+            , dataType: "json"
+            , data: {
+                "id": $(this).attr("data-id")
+            }
+            , success: function (data) {
+
+                var dob = moment(data.DateOfBirth).format('YYYY-MM-DD');
+                $(" #formEditPerson #PersonId").val(data.PersonId);
+                $(" #formEditPerson #LastName").val(data.LastName);
+                $(" #formEditPerson #FirstName").val(data.FirstName);
+                $(" #formEditPerson #Gender").val(data.Gender);
+                $(" #formEditPerson #DateOfBirth").val(dob);
+                $(" #formEditPerson #StateId").val(data.StateId);
+
+            }
+            , error: function (jqXHR, textStatus, errorThrown) {
+                $("#divPersonModalAlert").show();
+                $("#divPersonModalAlert").html(errorThrown);
+            }
+        });
+
+    });
+
+    //Bind Search button
+    $("#formSearch").submit(function (e) {
+        e.preventDefault();
+        //Get the list of people
+        $.ajax({
+            method: "GET"
+            , url: '@Url.RouteUrl(MvcRoutes.PeopleListRouteName)'
+            , dataType: "json"
+            , data: {
+                "firstName": $("#txtSearchFirstName").val()
+                , "lastName": $("#txtSearchLastName").val()
+            }
+            , success: function (data) {
+                $("#tbodyPeople").html("");
+                $.each(data, function (index, item) {
+                    var dob = moment(item.DateOfBirth).format('YYYY-MM-DD');
+                    $("#tbodyPeople").append(
+                        "<tr>"
+                        + "<td scope='row'>"
+                        + item.LastName
+                        + "</td>"
+                        + "<td scope='row'>"
+                        + item.FirstName
+                        + "</td>"
+                        + "<td scope='row'>"
+                        + item.Gender
+                        + "</td>"
+                        + "<td scope='row'>"
+                        + dob
+                        + "</td>"
+                        + "<td scope='row'>"
+                        + item.StateCode
+                        + "</td>"
+                        + "<td>"
+                        + "<div class='container-fluid'>"
+                        + "<button class='btn btn-info btn-edit' type='button' data-id='" + item.PersonId + "'><span class='fa fa-edit'></span>&nbsp;Edit</button>&nbsp;"
+                        + "</div>"
+                        + "</td>"
+                        + "</tr>"
+                    );
+                });
+
+            }
+            , error: function (jqXHR, textStatus, errorThrown) {
+                $("#divPersonModalAlert").show();
+                $("#divPersonModalAlert").html(errorThrown);
+            }
+        });
+
+    });
+
+
+
+
+});
+    </script>
+}

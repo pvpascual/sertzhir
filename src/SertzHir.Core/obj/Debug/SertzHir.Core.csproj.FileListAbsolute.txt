@@ -1,0 +1,11 @@
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\bin\Debug\SertzHir.Core.dll.config
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\bin\Debug\SertzHir.Core.dll
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\bin\Debug\SertzHir.Core.pdb
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\bin\Debug\EntityFramework.dll
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\bin\Debug\EntityFramework.xml
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\obj\Debug\SertzHir.Core.csproj.CoreCompileInputs.cache
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\obj\Debug\SertzHir.Core.csproj.CopyComplete
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\obj\Debug\SertzHir.Core.dll
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Core\obj\Debug\SertzHir.Core.pdb

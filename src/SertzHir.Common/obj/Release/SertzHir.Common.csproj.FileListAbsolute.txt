@@ -1,0 +1,11 @@
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\bin\Release\SertzHir.Common.dll
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\bin\Release\SertzHir.Common.pdb
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\bin\Release\Newtonsoft.Json.dll
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\bin\Release\SertzHir.Core.dll
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\bin\Release\SertzHir.Core.pdb
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\bin\Release\SertzHir.Core.dll.config
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\obj\Release\SertzHir.Common.csprojAssemblyReference.cache
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\obj\Release\SertzHir.Common.csproj.CoreCompileInputs.cache
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\obj\Release\SertzHir.Common.csproj.CopyComplete
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\obj\Release\SertzHir.Common.dll
+C:\Users\peeve\source\repos\SertzHir\src\SertzHir.Common\obj\Release\SertzHir.Common.pdb

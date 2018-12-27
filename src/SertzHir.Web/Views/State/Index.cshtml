@@ -1,0 +1,32 @@
+﻿@using SearchzHir.Web.ViewModels
+@model List<StateViewModel>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            <span>States List</span>
+        </h5>
+        <div style="height:30px;">
+        </div>
+        <table class="table table-hover">
+            <thead class="" style="background-color: #6AC7B3;">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">State Code</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.StateId</th>
+                    <th scope="row">@item.StateCode</th>
+          
+                </tr>
+            }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
